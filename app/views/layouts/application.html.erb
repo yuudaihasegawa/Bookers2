@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn"></ul>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <nav class="nav navbar-nav navbar-left">
+          <h4>Bookers</h4>
+        </nav>
+        <nav>
+          <div class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+              <div class="glyphicon glyphicon-home ">
+                <%= link_to "Home", user_path(current_user.id) %>
+              </div>
+              <div class="glyphicon glyphicon-user">
+                <%= link_to 'User', users_path %>
+              </div>
+              <div class="glyphicon glyphicon-book">
+                <%= link_to 'Books', books_path %>
+              </div>
+              <div class="glyphicon glyphicon-log-out">
+                <%= link_to 'logout', destroy_user_session_path, method: :delete %>
+              </div>
+            <% else %>
+              <div class="glyphicon glyphicon-home">
+                <%= link_to "Home", root_path %>
+              </div>
+              <div class="glyphicon glyphicon-link about">
+                <%= link_to 'About', home_about_path %>
+              </div>
+              <div class="glyphicon glyphicon-edit sign_up">
+                <%= link_to 'sing up', new_user_registration_path %>
+              </div>
+              <div class="glyphicon glyphicon-log-in">
+                <%= link_to 'login',new_user_session_path %>
+              </div>
+            <% end %>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div class="body">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>
